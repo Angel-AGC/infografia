@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Familias que Protegen, Infancias que Crecen</title>
+    
+    <!-- Google Fonts: Poppins (Respetado exactamente) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration (Colores originales preservados) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-bg': '#FDFBF7',
+                        'brand-dark': '#4A3022',
+                        'brand-yellow': '#FFD700',
+                        'brand-coral': '#F88379',
+                        'brand-green': '#A8E6CF',
+                        'brand-blue': '#9BC4E2'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS & Animations -->
+    <style>
+        /* ===== ESTILOS BASE Y FUENTE ORIGINAL ===== */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at 50% 15%, #F7F1E6 0%, #EDE4D3 50%, #DFD3BD 100%);
+            color: #4A3022;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ===== ANIMACIONES ORIGINALES DEL USUARIO (PRESERVADAS 100%) ===== */
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-60px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .animate-fade-down {
+            animation: fadeInDown 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes typing {
+            from { width: 0; opacity: 1; }
+            to { width: 100%; opacity: 1; }
+        }
+        .typewriter-wrapper {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            opacity: 0;
+            animation: fadeIn 0.1s forwards 1s, typing 2s steps(40, end) 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Background Floating Shapes Originales */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        .bg-shape {
+            position: absolute;
+            filter: blur(60px);
+            opacity: 0.4;
+            z-index: 0;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        .shape-1 { width: 300px; height: 300px; background: #FFD700; top: -50px; left: -100px; }
+        .shape-2 { width: 400px; height: 400px; background: #F88379; top: 40%; right: -150px; animation-delay: -2s; }
+        .shape-3 { width: 250px; height: 250px; background: #A8E6CF; bottom: -50px; left: 20%; animation-delay: -4s; }
+
+        /* Scroll Reveal Animations Originales */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Interactive Cards Originales */
+        .step-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: center;
+            position: relative;
+            z-index: 1;
+            transform: translateZ(30px); /* Elevación 3D en la hoja */
+        }
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-12px) scale(1.03) translateZ(55px);
+            box-shadow: 0 25px 50px -12px rgba(74, 48, 34, 0.25);
+            border-color: #FFD700 !important;
+            z-index: 10;
+        }
+        .step-card:hover::before {
+            opacity: 1;
+        }
+        .step-card:hover .icon-wrapper {
+            animation: bounceRotate 0.8s ease;
+            background-color: #FFD700;
+            color: #4A3022 !important;
+        }
+        /* Para las tarjetas con imagen, no cambiar el fondo al hacer hover */
+        .step-card:hover .icon-wrapper.card-img-ring {
+            animation: none;
+            background-color: transparent;
+            color: inherit;
+        }
+
+        @keyframes bounceRotate {
+            0% { transform: scale(1) rotate(0deg); }
+            30% { transform: scale(1.2) rotate(-15deg); }
+            50% { transform: scale(1.3) rotate(10deg); }
+            70% { transform: scale(1.1) rotate(-5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* Glassmorphism Panel Original */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 12px 36px 0 rgba(74, 48, 34, 0.15);
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(40px); /* Elevación 3D en la hoja */
+        }
+        
+        .glass-panel::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(30deg) translateY(-100%);
+            animation: glassShine 6s infinite;
+        }
+
+        @keyframes glassShine {
+            0% { transform: rotate(30deg) translateY(-100%) translateX(-100%); }
+            20%, 100% { transform: rotate(30deg) translateY(100%) translateX(100%); }
+        }
+
+        /* Staggered List Items Originales */
+        .stagger-item {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .reveal.active .stagger-item:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.2s; }
+        .reveal.active .stagger-item:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.4s; }
+        .reveal.active .stagger-item:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.6s; }
+
+        .stagger-item:hover .list-icon {
+            transform: scale(1.18) rotate(6deg);
+            color: #F88379;
+        }
+        .list-icon {
+            transition: all 0.3s ease;
+        }
+
+        /* Footer Pulse Animation Original */
+        @keyframes infinitePulse {
+            0% { transform: scale(1); text-shadow: 0 0 0 rgba(74,48,34,0); }
+            50% { transform: scale(1.02); text-shadow: 0 4px 15px rgba(74,48,34,0.2); }
+            100% { transform: scale(1); text-shadow: 0 0 0 rgba(74,48,34,0); }
+        }
+        .pulse-text {
+            display: inline-block;
+            animation: infinitePulse 2.5s infinite ease-in-out;
+        }
+
+        /* Custom highlight line Original */
+        .highlight-line {
+            position: relative;
+            display: inline-block;
+        }
+        .highlight-line::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 8px;
+            bottom: 4px;
+            left: 0;
+            background-color: #FFD700;
+            z-index: -1;
+            border-radius: 4px;
+            transform: scaleX(0);
+            transform-origin: bottom left;
+            animation: drawLine 1s ease forwards 1.5s;
+        }
+        @keyframes drawLine {
+            to { transform: scaleX(1); }
+        }
+
+        /* ==============================================================
+           ANIMACIÓN 3D DE ENTRADA (SOLO AL ABRIR) Y HOJA ESTÁTICA
+           ============================================================== */
+
+        /* CARA FRONTAL DE LA HOJA (PUBLICIDAD) */
+        .sheet-face-front {
+            background-color: #FDFBF7;
+            border-radius: 1.5rem;
+            position: relative;
+            width: 1200px;
+            max-width: 96vw;
+            margin: 0 auto;
+            zoom: 0.68; /* Vista folleto / hoja de Word alejada al 68% */
+            box-shadow: 
+                0 2px 6px rgba(74, 48, 34, 0.06),
+                0 18px 45px -8px rgba(74, 48, 34, 0.22),
+                0 35px 70px -15px rgba(74, 48, 34, 0.14),
+                0 0 0 1px rgba(74, 48, 34, 0.09),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 245, 230, 0.8);
+            overflow: hidden;
+            z-index: 2;
+            transition: zoom 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* Textura realista de papel / fibra en la hoja */
+        .paper-grain-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(74, 48, 34, 0.035) 1px, transparent 0);
+            background-size: 8px 8px;
+            pointer-events: none;
+            opacity: 0.65;
+            mix-blend-mode: multiply;
+            z-index: 3;
+        }
+
+        /* Interactive Checklist Badge en los Pasos */
+        .check-badge {
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .check-badge:hover {
+            transform: scale(1.25);
+        }
+        .check-badge.completed {
+            background-color: #2E8B57 !important;
+            color: white !important;
+            border-color: #2E8B57 !important;
+        }
+
+        /* ===== IMÁGENES IA EN PORTADA ===== */
+
+        /* Foto circular de la tarjeta con borde de color */
+        .card-img-ring {
+            position: relative;
+            flex-shrink: 0;
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 8px 24px -6px rgba(74,48,34,0.22);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-img-ring img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .step-card:hover .card-img-ring {
+            transform: scale(1.1) rotate(-3deg);
+            box-shadow: 0 14px 32px -6px rgba(74,48,34,0.3);
+        }
+        .step-card:hover .card-img-ring img {
+            transform: scale(1.08);
+        }
+        /* Hover: reemplaza el anillo de color */
+        .step-card:hover .card-img-ring.ring-blue  { box-shadow: 0 0 0 4px #FFD700, 0 14px 32px -6px rgba(74,48,34,0.3); }
+        .step-card:hover .card-img-ring.ring-green { box-shadow: 0 0 0 4px #FFD700, 0 14px 32px -6px rgba(74,48,34,0.3); }
+        .step-card:hover .card-img-ring.ring-coral { box-shadow: 0 0 0 4px #FFD700, 0 14px 32px -6px rgba(74,48,34,0.3); }
+
+        .card-img-ring.ring-blue  { box-shadow: 0 0 0 4px #9BC4E2, 0 8px 24px -6px rgba(74,48,34,0.2); }
+        .card-img-ring.ring-green { box-shadow: 0 0 0 4px #A8E6CF, 0 8px 24px -6px rgba(74,48,34,0.2); }
+        .card-img-ring.ring-coral { box-shadow: 0 0 0 4px #F88379, 0 8px 24px -6px rgba(74,48,34,0.2); }
+
+        /* Badge íícono flotante sobre la imagen */
+        .card-img-badge {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            border: 2px solid white;
+            transition: all 0.4s ease;
+            z-index: 5;
+        }
+        .step-card:hover .card-img-badge {
+            background-color: #FFD700 !important;
+            color: #4A3022 !important;
+            transform: scale(1.25) rotate(-15deg);
+        }
+
+        /* Hero Image Strip en el Header */
+        .hero-img-strip {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 1.2rem;
+            margin-top: 2.2rem;
+        }
+        .hero-img-card {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 16px 40px -10px rgba(74,48,34,0.22);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid white;
+            cursor: default;
+        }
+        .hero-img-card:nth-child(1) { width: 180px; height: 130px; transform: rotate(-4deg) translateY(8px); }
+        .hero-img-card:nth-child(2) { width: 200px; height: 150px; transform: rotate(0deg); z-index: 10; }
+        .hero-img-card:nth-child(3) { width: 180px; height: 130px; transform: rotate(4deg) translateY(8px); }
+        .hero-img-card:hover {
+            transform: rotate(0deg) translateY(-12px) scale(1.06) !important;
+            box-shadow: 0 24px 50px -10px rgba(74,48,34,0.32);
+            border-color: #FFD700;
+            z-index: 20;
+        }
+        .hero-img-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        .hero-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(74,48,34,0.55) 0%, transparent 50%);
+            display: flex;
+            align-items: flex-end;
+            padding: 0.55rem 0.6rem;
+        }
+        .hero-img-label {
+            font-size: 10px;
+            font-weight: 800;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            line-height: 1.2;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+        }
+        @keyframes heroImgEntrance {
+            0% { opacity: 0; transform: rotate(-4deg) translateY(40px) scale(0.88); }
+            100% { opacity: 1; transform: rotate(-4deg) translateY(8px) scale(1); }
+        }
+        @keyframes heroImgEntrance2 {
+            0% { opacity: 0; transform: rotate(0deg) translateY(40px) scale(0.88); }
+            100% { opacity: 1; transform: rotate(0deg) translateY(0px) scale(1); }
+        }
+        @keyframes heroImgEntrance3 {
+            0% { opacity: 0; transform: rotate(4deg) translateY(40px) scale(0.88); }
+            100% { opacity: 1; transform: rotate(4deg) translateY(8px) scale(1); }
+        }
+        .hero-img-card:nth-child(1) { animation: heroImgEntrance  1s cubic-bezier(0.22,1,0.36,1) 2.2s both; }
+        .hero-img-card:nth-child(2) { animation: heroImgEntrance2 1s cubic-bezier(0.22,1,0.36,1) 2.5s both; }
+        .hero-img-card:nth-child(3) { animation: heroImgEntrance3 1s cubic-bezier(0.22,1,0.36,1) 2.8s both; }
+
+        /* Borde luminoso decorativo de la hoja */
+        .sheet-edge-highlight {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,215,0,0.3), rgba(248,131,121,0.2), rgba(255,255,255,0.1)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 20;
+        }
+    </style>
+</head>
+<body class="relative flex flex-col items-center justify-start min-h-screen">
+
+    <!-- ==========================================
+         HOJAS Y PARTICULAS FLOTANTES EN EL FONDO 3D
+         ========================================== -->
+    <div id="ambient-leaves-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <!-- Generadas dinámicamente y con SVG estilizados -->
+        <div class="floating-leaf-ambient" style="top: 5%; left: 8%; animation-delay: 0s; animation-duration: 16s;">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="#A8E6CF" opacity="0.6">
+                <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+            </svg>
+        </div>
+        <div class="floating-leaf-ambient" style="top: 25%; right: 10%; animation-delay: 3s; animation-duration: 19s;">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="#FFD700" opacity="0.5">
+                <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+            </svg>
+        </div>
+        <div class="floating-leaf-ambient" style="top: 60%; left: 14%; animation-delay: 6s; animation-duration: 15s;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="#F88379" opacity="0.55">
+                <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+            </svg>
+        </div>
+        <div class="floating-leaf-ambient" style="top: 75%; right: 18%; animation-delay: 8s; animation-duration: 21s;">
+            <svg width="38" height="38" viewBox="0 0 24 24" fill="#9BC4E2" opacity="0.5">
+                <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+            </svg>
+        </div>
+    </div>
+
+    
+
+    
+    <div class="w-full flex justify-center items-center py-10 px-4">
+        <div id="folleto-sheet" class="sheet-face-front relative">
+
+                
+                <!-- Borde luminoso de alta gama -->
+                <div class="sheet-edge-highlight"></div>
+
+                <!-- Textura de fibra de papel -->
+                <div class="paper-grain-overlay"></div>
+
+                
+
+                
+
+                <!-- Ambient Background Shapes Originales (Dentro de la hoja) -->
+                <div class="bg-shape shape-1"></div>
+                <div class="bg-shape shape-2"></div>
+                <div class="bg-shape shape-3"></div>
+
+                <!-- Header Section Original (Elevado en 3D) -->
+                <header class="pt-10 md:pt-14 pb-6 px-6 md:px-12 text-center relative z-10">
+                    <div class="max-w-5xl mx-auto">
+                        <!-- Insignia Superior 3D -->
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-yellow/30 border border-brand-yellow text-brand-dark text-xs md:text-sm font-bold tracking-wider uppercase mb-5 shadow-sm transform hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-shield-heart text-brand-coral"></i>
+                            Campa&ntilde;a de Cuidado Integral
+                        </div>
+
+                        <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-brand-dark mb-6 leading-tight animate-fade-down uppercase tracking-tight">
+                            Familias que Protegen,<br/>
+                            <span class="highlight-line text-brand-coral">Infancias que Crecen</span>
+                        </h1>
+                        <div class="mt-4 h-12 overflow-hidden flex justify-center">
+                            <h2 class="text-base md:text-2xl lg:text-3xl font-semibold text-brand-dark opacity-90 typewriter-wrapper uppercase tracking-widest border-r-2 border-brand-dark pr-2">
+                                Tres acciones para cuidar, prevenir y crecer juntos
+                            </h2>
+                        </div>
+
+                        <!-- ✦ HERO IMAGE STRIP (Imágenes IA) ✦ -->
+                        <div class="hero-img-strip">
+                            <!-- Sparkle decorativo izquierdo -->
+                            <div class="hero-img-card">
+                                <img src="img-salud.jpg" alt="Salud infantil - Control m&eacute;dico" loading="lazy"/>
+                                <div class="hero-img-overlay">
+                                    <span class="hero-img-label">Salud<br/>al D&iacute;a</span>
+                                </div>
+                            </div>
+                            <div class="hero-img-card">
+                                <img src="img-nutricion.jpg" alt="Nutrición con amor - Familia cocinando" loading="lazy"/>
+                                <div class="hero-img-overlay">
+                                    <span class="hero-img-label">Nutrici&oacute;n<br/>con Amor</span>
+                                </div>
+                            </div>
+                            <div class="hero-img-card">
+                                <img src="img-tiempo.jpg" alt="Tiempo de calidad - Familia jugando" loading="lazy"/>
+                                <div class="hero-img-overlay">
+                                    <span class="hero-img-label">Tiempo de<br/>Calidad</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Separador decorativo con estrellas -->
+                        <div class="flex items-center justify-center gap-3 mt-5 mb-1 opacity-60">
+                            <div class="h-px flex-1 max-w-24 bg-gradient-to-r from-transparent to-brand-yellow"></div>
+                            <i class="fa-solid fa-star text-brand-yellow text-xs"></i>
+                            <i class="fa-solid fa-heart text-brand-coral text-xs"></i>
+                            <i class="fa-solid fa-star text-brand-yellow text-xs"></i>
+                            <div class="h-px flex-1 max-w-24 bg-gradient-to-l from-transparent to-brand-yellow"></div>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Main Content Grid Original (Elevado en 3D con interacción super pro) -->
+                <main class="flex-grow container mx-auto px-6 md:px-12 py-8 relative z-10 max-w-7xl">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                        
+                        <!-- Left Side: Interactive Cards (7 columns on desktop) -->
+                        <div class="lg:col-span-7 space-y-6">
+                            
+                            <!-- Card 1 -->
+                            <div class="step-card bg-white/85 backdrop-blur-sm p-6 md:p-7 rounded-2xl border-2 border-white shadow-xl flex items-center justify-between gap-5 reveal" data-step="1">
+                                <div class="flex items-center gap-5 md:gap-6">
+                                    <div class="icon-wrapper card-img-ring ring-blue flex-shrink-0">
+                                        <img src="img-salud.jpg" alt="Salud infantil" loading="lazy"/>
+                                        <span class="card-img-badge bg-brand-blue/90 text-white">
+                                            <i class="fa-regular fa-calendar-check"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-brand-dark whitespace-nowrap">Paso 1: Salud al D&iacute;a</h3>
+                                            <span class="text-xs bg-brand-blue/30 text-brand-dark font-semibold px-2 py-0.5 rounded-full">Prioritario</span>
+                                        </div>
+                                        <p class="text-gray-700 text-sm md:text-base leading-relaxed mt-1">
+                                            Mantener el control m&eacute;dico y registrar fechas importantes en el calendario protege el desarrollo de tu peque&ntilde;o.
+                                        </p>
+                                    </div>
+                                </div>
+                                <button class="check-badge w-10 h-10 rounded-full border-2 border-gray-300 bg-white/80 flex items-center justify-center text-gray-400 flex-shrink-0 shadow-sm" title="Marcar como cumplido hoy" onclick="toggleStepCheck(this)">
+                                    <i class="fa-solid fa-check text-sm"></i>
+                                </button>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="step-card bg-white/85 backdrop-blur-sm p-6 md:p-7 rounded-2xl border-2 border-white shadow-xl flex items-center justify-between gap-5 reveal" style="transition-delay: 0.1s;" data-step="2">
+                                <div class="flex items-center gap-5 md:gap-6">
+                                    <div class="icon-wrapper card-img-ring ring-green flex-shrink-0">
+                                        <img src="img-nutricion.jpg" alt="Nutrición con amor" loading="lazy"/>
+                                        <span class="card-img-badge bg-[#2E8B57]/90 text-white">
+                                            <i class="fa-solid fa-utensils"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-brand-dark whitespace-nowrap">Paso 2: Nutrici&oacute;n con Amor</h3>
+                                            <span class="text-xs bg-brand-green/40 text-[#2E8B57] font-semibold px-2 py-0.5 rounded-full">Diario</span>
+                                        </div>
+                                        <p class="text-gray-700 text-sm md:text-base leading-relaxed mt-1">
+                                            Preparar juntos alimentos variados, en un entorno seguro y con mucha paciencia, favorece el crecimiento.
+                                        </p>
+                                    </div>
+                                </div>
+                                <button class="check-badge w-10 h-10 rounded-full border-2 border-gray-300 bg-white/80 flex items-center justify-center text-gray-400 flex-shrink-0 shadow-sm" title="Marcar como cumplido hoy" onclick="toggleStepCheck(this)">
+                                    <i class="fa-solid fa-check text-sm"></i>
+                                </button>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="step-card bg-white/85 backdrop-blur-sm p-6 md:p-7 rounded-2xl border-2 border-white shadow-xl flex items-center justify-between gap-5 reveal" style="transition-delay: 0.2s;" data-step="3">
+                                <div class="flex items-center gap-5 md:gap-6">
+                                    <div class="icon-wrapper card-img-ring ring-coral flex-shrink-0">
+                                        <img src="img-tiempo.jpg" alt="Tiempo de calidad" loading="lazy"/>
+                                        <span class="card-img-badge bg-brand-coral/90 text-white">
+                                            <i class="fa-solid fa-hands-holding-child"></i>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-brand-dark whitespace-nowrap">Paso 3: Tiempo de Calidad</h3>
+                                            <span class="text-xs bg-brand-coral/30 text-brand-coral font-semibold px-2 py-0.5 rounded-full">Afecto</span>
+                                        </div>
+                                        <p class="text-gray-700 text-sm md:text-base leading-relaxed mt-1">
+                                            Jugar, escuchar y proteger, compartiendo las responsabilidades familiares, fortalece el v&iacute;nculo afectivo.
+                                        </p>
+                                    </div>
+                                </div>
+                                <button class="check-badge w-10 h-10 rounded-full border-2 border-gray-300 bg-white/80 flex items-center justify-center text-gray-400 flex-shrink-0 shadow-sm" title="Marcar como cumplido hoy" onclick="toggleStepCheck(this)">
+                                    <i class="fa-solid fa-check text-sm"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <!-- Right Side: Glassmorphism Panel (5 columns on desktop) -->
+                        <div class="lg:col-span-5 reveal relative">
+                            <!-- Floating decorative element for the panel Original -->
+                            <div class="absolute -top-6 -right-6 text-brand-yellow text-5xl animate-spin z-20 drop-shadow-md" style="animation-duration: 10s;">
+                                <i class="fa-solid fa-certificate"></i>
+                            </div>
+                            
+                            <div class="glass-panel p-6 md:p-8 rounded-[2rem]">
+                                <div class="text-center mb-10">
+                                    <h3 class="text-xl md:text-2xl font-extrabold text-brand-dark mb-2 tracking-normal">PLAN DE CORRESPONSABILIDAD</h3>
+                                    <div class="inline-block bg-brand-dark text-white text-xs md:text-sm font-bold px-4 py-1 rounded-full tracking-wider shadow-md">
+                                        ( 3 PASOS )
+                                    </div>
+                                </div>
+
+                                <ul class="space-y-8">
+                                    <li class="flex items-start gap-5 stagger-item">
+                                        <div class="mt-1 w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-brand-blue flex-shrink-0 list-icon border border-gray-100">
+                                            <i class="fa-solid fa-notes-medical text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-lg text-brand-dark">1. Organizar Salud.</h4>
+                                            <p class="text-gray-800 text-sm mt-1">Registre citas m&eacute;dicas y de vacunaci&oacute;n. Asistan juntos a los controles.</p>
+                                        </div>
+                                    </li>
+                                    
+                                    <li class="flex items-start gap-5 stagger-item">
+                                        <div class="mt-1 w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#2E8B57] flex-shrink-0 list-icon border border-gray-100">
+                                            <i class="fa-solid fa-bowl-food text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-lg text-brand-dark">2. Alimentaci&oacute;n Segura.</h4>
+                                            <p class="text-gray-800 text-sm mt-1">Asegure alimentos variados, agua potable y un entorno de cocina limpio.</p>
+                                        </div>
+                                    </li>
+
+                                    <li class="flex items-start gap-5 stagger-item">
+                                        <div class="mt-1 w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-brand-coral flex-shrink-0 list-icon border border-gray-100">
+                                            <i class="fa-solid fa-people-roof text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-lg text-brand-dark">3. Cuidado y Tiempo.</h4>
+                                            <p class="text-gray-800 text-sm mt-1">Escuche, proteja y comparta el juego juntos. Distribuya las tareas del hogar.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <!-- Progreso Interactivo Dinámico -->
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </main>
+
+                <!-- Footer / Bottom Banner Original (Elevado en 3D) -->
+                <footer class="mt-12 bg-brand-yellow py-10 px-6 relative z-10 shadow-[0_-15px_40px_-15px_rgba(255,215,0,0.5)] overflow-hidden">
+                    <!-- Animated pattern overlay for footer Original -->
+                    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#4A3022 2px, transparent 2px); background-size: 30px 30px;"></div>
+                    
+                    <div class="max-w-4xl mx-auto text-center relative z-20">
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-brand-dark pulse-text uppercase">
+                            Unidos Por Sus Derechos
+                        </h2>
+                        <div class="mt-3 md:mt-5">
+                            <span class="inline-block bg-white text-brand-dark font-bold text-lg md:text-2xl lg:text-3xl py-2.5 px-7 rounded-xl shadow-lg transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+                                Cuidar, Prevenir Y Crecer Juntos
+                            </span>
+                        </div>
+                        <p class="mt-4 text-xs md:text-sm font-semibold text-brand-dark/80">
+                            &copy; Campa&ntilde;a Nacional por la Ni&ntilde;ez &bull; Compromiso Compartido en Familia
+                        </p>
+                    </div>
+                </footer>
+
+        </div>
+    </div>
+
+    <!-- Indicador informativo en la parte inferior -->
+    <footer class="w-full text-center py-6 text-brand-dark/70 font-semibold text-xs flex items-center justify-center gap-2 z-20">
+        <i class="fa-solid fa-shield-heart text-brand-coral"></i>
+        <span>Familias que Protegen, Infancias que Crecen &bull; Presentaci&oacute;n Interactiva </span>
+    </footer>
+
+    <!-- ==============================================================
+         SCRIPTS: OBSERVER ORIGINAL + CONTROL DE HOJA 3D ESTÁTICA
+         ============================================================== -->
+            <!-- ==========================================
+         BARRA DE CONTROL DE ZOOM ESTILO WORD (FLOTANTE)
+         ========================================== -->
+    <div id="word-zoom-bar" class="fixed bottom-5 right-5 z-50 flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/95 backdrop-blur-md shadow-2xl border border-brand-dark/15 text-brand-dark text-xs font-semibold select-none transition-all hover:shadow-brand-yellow/30">
+        <span class="text-brand-coral font-bold flex items-center gap-1.5 mr-1 text-[11px] uppercase tracking-wider">
+            <i class="fa-solid fa-file-lines text-xs"></i>
+            <span class="hidden sm:inline">Vista Folleto</span>
+        </span>
+        <button onclick="changeZoom(-0.05)" class="w-6 h-6 rounded-full flex items-center justify-center bg-gray-100 hover:bg-brand-yellow text-brand-dark transition-all text-xs font-black shadow-sm cursor-pointer" title="Alejar (Zoom -)">
+            <i class="fa-solid fa-minus text-[10px]"></i>
+        </button>
+        <span id="zoom-level-text" class="w-10 text-center font-black text-xs text-brand-dark">68%</span>
+        <button onclick="changeZoom(0.05)" class="w-6 h-6 rounded-full flex items-center justify-center bg-gray-100 hover:bg-brand-yellow text-brand-dark transition-all text-xs font-black shadow-sm cursor-pointer" title="Acercar (Zoom +)">
+            <i class="fa-solid fa-plus text-[10px]"></i>
+        </button>
+        <div class="h-4 w-px bg-brand-dark/20 mx-1"></div>
+        <button onclick="fitToScreen()" class="px-2.5 py-1 rounded-full bg-brand-yellow/30 hover:bg-brand-yellow text-brand-dark text-[11px] font-black transition-all shadow-sm cursor-pointer" title="Ajustar exactamente a la pantalla">
+            <i class="fa-solid fa-expand text-[10px] mr-1"></i>Ajustar
+        </button>
+        <button onclick="applyZoom(1.0)" class="px-2.5 py-1 rounded-full bg-gray-100 hover:bg-brand-yellow text-brand-dark text-[11px] font-bold transition-all shadow-sm cursor-pointer" title="Ver en tama&ntilde;o original 100%">
+            100%
+        </button>
+    </div>
+
+    <!-- ==============================================================
+         SCRIPTS: OBSERVER ORIGINAL + CONTROL DE ZOOM TIPO WORD
+         ============================================================== -->
+    <script>
+        // === CONTROL DE ZOOM ESTILO WORD (HOJA DE FOLLETO) ===
+        let currentZoom = 0.68;
+
+        function applyZoom(val) {
+            currentZoom = Math.min(Math.max(val, 0.45), 1.3);
+            const sheet = document.getElementById('folleto-sheet');
+            if (sheet) {
+                sheet.style.zoom = currentZoom;
+            }
+            const txt = document.getElementById('zoom-level-text');
+            if (txt) {
+                txt.innerText = Math.round(currentZoom * 100) + '%';
+            }
+        }
+
+        function changeZoom(delta) {
+            applyZoom(currentZoom + delta);
+        }
+
+        function fitToScreen() {
+            const sheet = document.getElementById('folleto-sheet');
+            if (!sheet) return;
+            const prevZoom = sheet.style.zoom;
+            sheet.style.zoom = '1';
+            const naturalHeight = sheet.offsetHeight || 1350;
+            sheet.style.zoom = prevZoom;
+            const availableHeight = window.innerHeight - 70;
+            const optimalZoom = Math.min(Math.max(availableHeight / naturalHeight, 0.45), 0.95);
+            applyZoom(optimalZoom);
+        }
+
+        // === SCROLL REVEAL ===
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver(
+                (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }),
+                { threshold: 0.1 }
+            );
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            
+            // Activar todos los elementos visibles tras el zoom inicial
+            setTimeout(() => {
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+            }, 300);
+
+            // Quitar cursor del typewriter al terminar
+            setTimeout(() => {
+                const tw = document.querySelector('.typewriter-wrapper');
+                if (tw) tw.style.borderRight = 'none';
+            }, 3500);
+        });
+
+        // === CHECKLIST INTERACTIVO DE PASOS ===
+        let completedSteps = new Set();
+        function toggleStepCheck(btn) {
+            const card    = btn.closest('.step-card');
+            const stepNum = card.getAttribute('data-step');
+            if (completedSteps.has(stepNum)) {
+                completedSteps.delete(stepNum);
+                btn.classList.remove('completed');
+                btn.innerHTML = '<i class="fa-solid fa-check text-sm"></i>';
+                card.style.borderColor = 'white';
+            } else {
+                completedSteps.add(stepNum);
+                btn.classList.add('completed');
+                btn.innerHTML = '<i class="fa-solid fa-check-double text-sm"></i>';
+                card.style.borderColor = '#A8E6CF';
+            }
+        }
+    </script>
+</body>
+</html>
